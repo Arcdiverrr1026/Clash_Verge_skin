@@ -4,6 +4,10 @@
 >
 > 一款受 **[tw93/Kami](https://github.com/tw93/Kami)**（[kami.tw93.fun](https://kami.tw93.fun)）纸张排版美学启发的 **Clash Verge / Clash Verge Rev** 自定义 CSS 主题。摒弃玻璃拟态与荧光渐变，以四阶暖色实体纸张层次、克制的传统墨蓝色（`#1B365D`）与人文衬线字体，让日常网络代理工具呈现如纸质书籍与杂志般的温润阅读体验。
 
+## 🖼️ 主题预览 (Preview)
+
+![Kami 纸张主题在 Clash Verge 中的浅色首页效果](./assets/kami-preview.png)
+
 ---
 
 ## ✨ 设计特点 (Highlights)
