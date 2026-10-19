@@ -1,0 +1,1223 @@
+/* ==========================================================================
+   Kami (紙) Theme for Clash Verge / Clash Verge Rev (v1.0.0)
+   Inspired by https://github.com/tw93/Kami ("Good content deserves good paper")
+   ==========================================================================
+   Surface Hierarchy (Strictly aligned with kami.tw93.fun):
+   - Level 0 (Sidebar & Modal Bars): #efede4 (Warm Linen — anchors navigation & modal chrome)
+   - Level 1 (Page & Modal Canvas):  #f5f4ed (Kami --parchment — main reading surface)
+   - Level 2 (Elevated Paper Cards): #faf9f5 (Kami --ivory — lifted paper sheets with 1px warm border)
+   - Level 3 (Recessed Controls):    #f2f0e6 / #e8e6dc (Warm sand for Selects, Buttons, Inputs)
+   - Single Accent:                  #1B365D (Kami Ink Blue — ≤ 5% surface area)
+   ========================================================================== */
+
+@font-face {
+  font-family: "TsangerJinKai02";
+  src: url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   01. KAMI DESIGN TOKENS (Light / Warm Parchment Default)
+   ========================================================================== */
+:root,
+html,
+html[data-css-injection-root] {
+  color-scheme: light;
+
+  /* --- 4-Step Physical Paper Surface Ladder --- */
+  --sidebar-bg:     #efede4; /* Level 0: Left navigation rail — warm linen */
+  --parchment:      #f5f4ed; /* Level 1: Main page canvas & header — Kami parchment */
+  --ivory:          #faf9f5; /* Level 2: Elevated cards & dialogs — Kami ivory */
+  --control-bg:     #f2f0e6; /* Level 3: Selects, inputs & controls inside ivory cards */
+  --warm-sand:      #e8e6dc; /* Secondary buttons, hovered controls, table headers */
+  --inline-code-bg: #f0eee6; /* Subtle row hover / recessed group track */
+
+  /* --- Brand & Registered Solid Tints (≤ 5% surface rule) --- */
+  --brand:          #1B365D; /* Ink Blue — single chromatic accent */
+  --brand-light:    #2D5A8A; /* Ink Light — hover / secondary link */
+  --tag-bg:         #E4ECF5; /* Default solid tag & selected chip fill */
+  --brand-tint:     #EEF2F7; /* Quietest solid tint for active proxy/profile cards */
+
+  /* --- Text (4 Warm Gray Levels, R ≈ G > B) --- */
+  --near-black:     #141413; /* Primary text — warm olive-black */
+  --dark-warm:      #3d3d3a; /* Secondary text, sidebar items, table headers */
+  --olive:          #504e49; /* Subtext, descriptions, captions */
+  --stone:          #6b6a64; /* Tertiary text, metadata, timestamps, muted icons */
+
+  /* --- Borders & Hairlines --- */
+  --border:         #e2dfd5; /* Primary structural hairline for cards & sections */
+  --border-soft:    #ece9df; /* Subtle interior row separator inside cards */
+  --line:           #d2cfc2; /* Hovered / control border hairline */
+
+  /* --- Semantic Warm Accents --- */
+  --breaking-bg:    #f0e0d8; /* Muted warm peach for warnings / errors */
+  --breaking-fg:    #8b4513; /* Warm brown alert text */
+  --ok-bg:          #e4ede4; /* Muted sage tint for low-latency / connected badges */
+  --ok-fg:          #284d35; /* Restrained forest ink */
+
+  /* --- Typography Stacks --- */
+  --serif: "Charter", "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN",
+           "Noto Serif CJK SC", "Songti SC", "STSong", "Georgia", "Palatino", serif;
+  --sans:  var(--serif);
+  --mono:  "JetBrains Mono", "SF Mono", "Fira Code", "Consolas", "Monaco",
+           "TsangerJinKai02", "Source Han Serif SC", monospace;
+
+  /* --- Radii & Whisper Shadow --- */
+  --kami-radius-sm: 4px;
+  --kami-radius-md: 8px;
+  --kami-card-shadow:    0 1px 2px rgba(20, 19, 19, 0.03);
+  --kami-popover-shadow: 0 8px 24px rgba(20, 19, 19, 0.08);
+
+  /* --- Clash Verge Runtime Variable Overrides --- */
+  --primary-main:           var(--brand) !important;
+  --text-primary:           var(--near-black) !important;
+  --background-color:       var(--parchment) !important;
+  --background-color-alpha: var(--brand-tint) !important;
+  --divider-color:          var(--border) !important;
+  --selection-color:        var(--tag-bg) !important;
+  --scroller-color:         var(--line) !important;
+  --scrollbar-bg:           transparent !important;
+  --scrollbar-thumb:        var(--line) !important;
+  --window-border-color:    var(--border) !important;
+  --border-radius:          var(--kami-radius-md) !important;
+}
+
+/* Optional Dark Mode Adaptation (uses Kami's official --deep-dark & --dark-surface tokens) */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="dark"],
+  html.dark,
+  body[data-theme="dark"] {
+    color-scheme: dark;
+    --sidebar-bg:     #111110;
+    --parchment:      #141413; /* Kami --deep-dark */
+    --ivory:          #1d1d1b; /* Elevated warm charcoal card */
+    --control-bg:     #252523;
+    --warm-sand:      #2c2c29; /* Kami --dark-surface */
+    --inline-code-bg: #222220;
+    --brand:          #3B6EA5;
+    --brand-light:    #5286BE;
+    --tag-bg:         #1d2d42;
+    --brand-tint:     #182332;
+    --near-black:     #f5f4ed;
+    --dark-warm:      #dcd9ce;
+    --olive:          #a6a295;
+    --stone:          #7d7a70;
+    --border:         #2b2b28;
+    --border-soft:    #222220;
+    --line:           #3a3a36;
+    --breaking-bg:    #38261e;
+    --breaking-fg:    #e0a98b;
+    --ok-bg:          #1e2e24;
+    --ok-fg:          #8ab899;
+    --kami-card-shadow:    0 1px 3px rgba(0, 0, 0, 0.25);
+    --kami-popover-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* ==========================================================================
+   02. GLOBAL RESET, TYPOGRAPHY & CANVAS
+   ========================================================================== */
+html,
+body,
+#root {
+  background-color: var(--parchment) !important;
+  color: var(--near-black) !important;
+  font-family: var(--serif) !important;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--tag-bg) !important;
+  color: var(--brand) !important;
+}
+
+.MuiTypography-root,
+.MuiButton-root,
+.MuiTab-root,
+.MuiMenuItem-root,
+.MuiListItemText-primary,
+.MuiListItemText-secondary,
+.MuiInputBase-root,
+.MuiFormLabel-root,
+.MuiChip-root {
+  font-family: var(--serif) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3,
+.MuiTypography-h4,
+.MuiTypography-h5,
+.MuiTypography-h6,
+.MuiTypography-subtitle1,
+.MuiDialogTitle-root,
+.MuiListSubheader-root {
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  color: var(--near-black) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.2px !important;
+}
+
+strong, b {
+  font-weight: 600 !important;
+  color: var(--near-black);
+}
+
+.MuiTypography-body1 {
+  color: var(--near-black) !important;
+  font-weight: 400 !important;
+}
+
+.MuiTypography-body2,
+.MuiTypography-subtitle2 {
+  color: var(--dark-warm) !important;
+  font-weight: 400 !important;
+}
+
+.MuiTypography-caption,
+.MuiTypography-colorTextSecondary,
+.MuiListItemText-secondary,
+.MuiFormHelperText-root {
+  color: var(--olive) !important;
+  font-weight: 400 !important;
+}
+
+/* Monospace & Tabular Numerals for Technical Data (Traffic, Latency, Logs, Rules, Ports) */
+code, pre,
+.the-traffic,
+.MuiChip-label,
+.MuiTable-root td {
+  font-family: var(--mono) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* ==========================================================================
+   03. APPLICATION SHELL & LEFT SIDEBAR (Clean Editorial Navigation)
+   ========================================================================== */
+.layout,
+.layout-content,
+.layout-content__right,
+.layout-content__right .the-content,
+.base-page,
+.base-container,
+.base-container > section,
+.base-content {
+  background-color: var(--parchment) !important;
+  background-image: none !important;
+}
+
+/* Left Sidebar: Level 0 Warm Linen (#efede4) */
+.layout-content__left,
+.layout__left {
+  background-color: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* Logo Area */
+.the-logo {
+  border-bottom: 1px solid var(--border) !important;
+  background: transparent !important;
+}
+
+.the-logo svg,
+.the-logo img {
+  filter: saturate(0.25) contrast(1.05);
+  opacity: 0.92;
+}
+
+.the-logo .the-newbtn {
+  background-color: var(--warm-sand) !important;
+  color: var(--dark-warm) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--kami-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+/* Left Navigation Menu — Enlarged & Bolder, Clean Pill Hierarchy (No Clipped Side Bar) */
+.the-menu {
+  padding: 10px 10px !important;
+  background: transparent !important;
+}
+
+.the-menu .MuiListItem-root {
+  padding: 3px 0 !important;
+}
+
+.the-menu .MuiListItemButton-root {
+  border-radius: var(--kami-radius-md) !important;
+  padding: 9px 14px !important;
+  margin: 1px 4px !important;
+  color: var(--dark-warm) !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease !important;
+}
+
+/* Remove any pseudo-bar that clips rounded corners */
+.the-menu .MuiListItemButton-root::before {
+  display: none !important;
+  content: none !important;
+}
+
+.the-menu .MuiListItemButton-root .MuiListItemIcon-root,
+.the-menu .MuiListItemButton-root .MuiSvgIcon-root {
+  color: var(--olive) !important;
+  font-size: 20px !important;
+  transition: color 140ms ease !important;
+}
+
+/* Sidebar Unselected Text: 15.5px + 600 Weight */
+.the-menu .MuiListItemButton-root .MuiListItemText-primary {
+  font-family: var(--serif) !important;
+  font-size: 15.5px !important;
+  font-weight: 600 !important;
+  -webkit-text-stroke: 0.18px currentColor;
+  color: var(--dark-warm) !important;
+  letter-spacing: 0.4px !important;
+  line-height: 1.35 !important;
+}
+
+/* Sidebar Hover State */
+.the-menu .MuiListItemButton-root:hover {
+  background-color: var(--warm-sand) !important;
+  color: var(--near-black) !important;
+}
+
+.the-menu .MuiListItemButton-root:hover .MuiListItemText-primary,
+.the-menu .MuiListItemButton-root:hover .MuiListItemIcon-root,
+.the-menu .MuiListItemButton-root:hover .MuiSvgIcon-root {
+  color: var(--near-black) !important;
+}
+
+/* Sidebar Selected / Active State: Lifted Ivory Card + Ink Blue Text (16px, 700 Weight) */
+.the-menu .MuiListItemButton-root.Mui-selected,
+.the-menu .MuiListItemButton-root.Mui-selected:hover {
+  background-color: var(--ivory) !important;
+  color: var(--brand) !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+}
+
+.the-menu .MuiListItemButton-root.Mui-selected .MuiListItemText-primary {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.35px currentColor;
+  color: var(--brand) !important;
+}
+
+.the-menu .MuiListItemButton-root.Mui-selected .MuiListItemIcon-root,
+.the-menu .MuiListItemButton-root.Mui-selected .MuiSvgIcon-root {
+  color: var(--brand) !important;
+}
+
+/* Traffic Monitor Footer in Sidebar */
+.the-traffic {
+  border-top: 1px solid var(--border) !important;
+  background-color: transparent !important;
+  color: var(--dark-warm) !important;
+  padding-top: 10px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.the-traffic canvas {
+  filter: sepia(0.25) hue-rotate(175deg) saturate(0.75) opacity(0.85);
+}
+
+/* ==========================================================================
+   04. PAGE HEADER (Editorial Document Title & Clean Action Icons)
+   ========================================================================== */
+.base-page > header {
+  background-color: var(--parchment) !important;
+  border-bottom: 1px solid var(--border) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.base-page > header h1,
+.base-page > header h2,
+.base-page > header h3,
+.base-page > header > .MuiTypography-root,
+.base-page > header > div:first-child .MuiTypography-root {
+  font-family: var(--serif) !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.25px currentColor;
+  color: var(--near-black) !important;
+  letter-spacing: 0.3px !important;
+}
+
+.base-page > header .MuiBox-root {
+  font-size: 13.5px;
+  font-weight: 500;
+  -webkit-text-stroke: 0;
+  color: var(--dark-warm);
+}
+
+/* ==========================================================================
+   05. LEVEL 2 SURFACES: ELEVATED IVORY CARDS (#faf9f5 on #f5f4ed Canvas)
+   Covers Settings panels, Home cards, Proxy Groups, Proxy Nodes, and Profiles
+   ========================================================================== */
+
+/* 5A. Standard Cards, Settings Grid Panels & Global Extend Config / Script */
+.MuiCard-root,
+.MuiAccordion-root,
+.MuiTableContainer-root,
+.MuiDataGrid-root,
+.base-content > .MuiGrid-container > .MuiGrid-root > .MuiBox-root,
+.base-content .MuiGrid-root > .MuiBox-root:not(:has(.MuiBox-root[aria-selected])),
+.base-content .MuiGrid-root > .MuiCard-root,
+.base-content .MuiGrid-root > .MuiPaper-root,
+section .MuiPaper-root:not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiAlert-root) {
+  background: var(--ivory) !important;
+  background-color: var(--ivory) !important;
+  background-image: none !important;
+  color: var(--near-black) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Keep sortable dnd-kit wrapper around Profile cards transparent (avoid double border) */
+.base-content .MuiGrid-root > .MuiBox-root:has(.MuiBox-root[aria-selected]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 5B. Settings Card Interior Rows: Subtle Kami Table-like Row Hairlines */
+.base-content .MuiList-root {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.base-content .MuiList-root > .MuiListItem-root {
+  border-bottom: 1px solid var(--border-soft) !important;
+  min-height: 46px !important;
+}
+
+.base-content .MuiList-root > .MuiListItem-root:last-child {
+  border-bottom: none !important;
+}
+
+/* Clickable rows inside Settings <List> cards stay flush with the ivory card */
+.base-content .MuiList-root .MuiListItemButton-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-height: 46px !important;
+}
+
+.base-content .MuiList-root .MuiListItemButton-root:hover {
+  background: var(--inline-code-bg) !important;
+  background-color: var(--inline-code-bg) !important;
+}
+
+/* 5C. Proxy Group Headers ("吹雪云", "自动选择", "故障转移") & Proxy Node Tiles */
+/* Keep StickyVirtualList row wrappers completely transparent on the Parchment canvas */
+.base-content div[data-index][style*="position: sticky"],
+.base-content div[data-index][style*="position: sticky"] > div,
+.base-content div[data-index][style*="position: absolute"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Clean spacing for Proxy Group header rows; reserve right lane when navigator ("吹/自/故") is shown */
+.base-content div[data-index][style*="position: sticky"] > div {
+  padding: 5px 12px !important;
+}
+
+.base-content div:has(> div[style*="position: absolute"][style*="right: 2px"]) div[data-index][style*="position: sticky"] > div,
+.base-content div:has(> div[style*="position: absolute"][style*="right: 2px"]) div[data-index][style*="position: absolute"] > .MuiBox-root,
+.base-content div:has(> div[style*="position: absolute"][style*="right: 2px"]) div[data-index][style*="position: absolute"] > .MuiListItem-root {
+  padding-left: 12px !important;
+  padding-right: 34px !important;
+}
+
+/* Proxy Group Cards & Proxy Node Tiles: Elevated Ivory (#faf9f5) on Parchment (#f5f4ed) */
+.base-content div[data-index] .MuiListItemButton-root,
+.base-content .MuiListItemButton-root:not(.MuiList-root .MuiListItemButton-root) {
+  background: var(--ivory) !important;
+  background-color: var(--ivory) !important;
+  background-image: none !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  color: var(--near-black) !important;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease !important;
+}
+
+.base-content div[data-index] .MuiListItemButton-root:hover,
+.base-content .MuiListItemButton-root:not(.MuiList-root .MuiListItemButton-root):hover {
+  background: var(--inline-code-bg) !important;
+  background-color: var(--inline-code-bg) !important;
+  border-color: var(--line) !important;
+}
+
+/* Selected Proxy Node Card: Quiet Solid Tint (#EEF2F7) + Ink Blue Accent */
+.base-content div[data-index] .MuiListItemButton-root.Mui-selected,
+.base-content div[data-index] .MuiListItemButton-root.Mui-selected:hover,
+.base-content .MuiListItemButton-root.Mui-selected,
+.base-content .MuiListItemButton-root.Mui-selected:hover {
+  background: var(--brand-tint) !important;
+  background-color: var(--brand-tint) !important;
+  border: 1px solid var(--brand) !important;
+  border-left: 3.5px solid var(--brand) !important;
+  color: var(--brand) !important;
+  box-shadow: none !important;
+}
+
+.base-content .MuiListItemButton-root.Mui-selected .MuiTypography-root,
+.base-content .MuiListItemButton-root.Mui-selected span {
+  color: var(--brand) !important;
+  font-weight: 600 !important;
+}
+
+/* Right-side ProxyGroupNavigator ("吹 / 自 / 故" quick jump buttons) */
+.base-content div[style*="position: absolute"][style*="right: 2px"] {
+  right: 4px !important;
+  gap: 4px !important;
+}
+
+.base-content div[style*="position: absolute"][style*="right: 2px"] .MuiButton-root {
+  background-color: var(--ivory) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 6px !important;
+  color: var(--olive) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  font-family: var(--serif) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  min-width: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.base-content div[style*="position: absolute"][style*="right: 2px"] .MuiButton-root:hover {
+  background-color: var(--brand) !important;
+  border-color: var(--brand) !important;
+  color: var(--ivory) !important;
+}
+
+/* 5D. Profile Subscription Cards (.MuiBox-root[aria-selected]) */
+.base-content .MuiBox-root[aria-selected] {
+  background: var(--ivory) !important;
+  background-color: var(--ivory) !important;
+  background-image: none !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  color: var(--near-black) !important;
+  transition: background-color 120ms ease, border-color 120ms ease !important;
+}
+
+.base-content .MuiBox-root[aria-selected]:hover,
+.base-content .MuiGrid-root > .MuiBox-root:not(:has(.MuiBox-root[aria-selected])):hover {
+  border-color: var(--line) !important;
+}
+
+.base-content .MuiBox-root[aria-selected="true"],
+.base-content .MuiBox-root[aria-selected="true"]:hover {
+  background: var(--brand-tint) !important;
+  background-color: var(--brand-tint) !important;
+  border: 1px solid var(--brand) !important;
+  border-left: 3.5px solid var(--brand) !important;
+  color: var(--brand) !important;
+  box-shadow: none !important;
+}
+
+.base-content .MuiBox-root[aria-selected="true"] h2,
+.base-content .MuiBox-root[aria-selected="true"] .MuiTypography-root {
+  color: var(--brand) !important;
+}
+
+/* Remove MUI Accordion default pseudo-line */
+.MuiAccordion-root::before {
+  display: none !important;
+}
+
+/* Linear Progress Bar (Profile bandwidth usage) */
+.MuiLinearProgress-root {
+  background-color: var(--warm-sand) !important;
+  border-radius: 2px !important;
+  height: 4px !important;
+}
+
+.MuiLinearProgress-bar {
+  background-color: var(--brand) !important;
+}
+
+/* ==========================================================================
+   06. CONNECTIONS PAGE VIRTUALIZED TABLE & STANDARD TABLES
+   (Scoped via :not([data-index]) so it NEVER collides with StickyVirtualList)
+   ========================================================================== */
+/* Remove the inline border-radius: 8px on the full-width Connections scroll container
+   so the top-left corner of "主机" never curves away from the sidebar border */
+.base-content div[style*="overscroll-behavior: contain"] {
+  border-radius: 0 !important;
+  background-color: var(--ivory) !important;
+}
+
+/* Outer sticky wrapper: keep transparent and borderless to prevent double border! */
+.base-content div:not([data-index])[style*="position: sticky"][style*="top: 0"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Inner flex header row ("主机 | 下载量 | 上传量 | 下载速度 | 上传速度"):
+   Clean editorial table header with a single 1px top & bottom hairline */
+.base-content div:not([data-index])[style*="position: sticky"][style*="top: 0"] > div[style*="display: flex"] {
+  background: var(--parchment) !important;
+  background-color: var(--parchment) !important;
+  border-top: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  color: var(--olive) !important;
+}
+
+.base-content div:not([data-index])[style*="position: sticky"][style*="top: 0"] > div[style*="display: flex"] > div {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--olive) !important;
+  border-right: none !important;
+}
+
+.base-content div:not([data-index])[style*="position: sticky"][style*="top: 0"] button {
+  font-family: var(--serif) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: var(--olive) !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.base-content div:not([data-index])[style*="position: sticky"][style*="top: 0"] button:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--brand) !important;
+}
+
+/* Connections Virtualized Body Rows */
+.base-content div[style*="position: relative"] > div[style*="position: absolute"][style*="display: flex"] {
+  background-color: var(--ivory) !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  color: var(--near-black) !important;
+  font-family: var(--mono) !important;
+  font-variant-numeric: tabular-nums !important;
+  transition: background-color 100ms ease !important;
+}
+
+.base-content div[style*="position: relative"] > div[style*="position: absolute"][style*="display: flex"]:hover {
+  background-color: var(--inline-code-bg) !important;
+}
+
+/* Standard MUI Tables & DataGrid Fallback */
+.MuiTable-root {
+  border-collapse: collapse !important;
+}
+
+.MuiTableHead-root,
+.MuiTableHead-root .MuiTableCell-root,
+.MuiDataGrid-columnHeaders {
+  background-color: var(--sidebar-bg) !important;
+  color: var(--dark-warm) !important;
+  font-family: var(--serif) !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+.MuiTableBody-root .MuiTableCell-root {
+  background-color: var(--ivory) !important;
+  color: var(--near-black) !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  font-family: var(--mono) !important;
+  font-size: 12.5px !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.MuiTableRow-root:hover .MuiTableCell-root {
+  background-color: var(--inline-code-bg) !important;
+}
+
+/* ==========================================================================
+   07. SECONDARY MODALS / DIALOGS, MENUS, POPOVERS & TOOLTIPS
+   Gives all secondary settings modals ("界面设置", "系统代理", "Tun 模式", etc.)
+   the exact same 3-layer Kami paper hierarchy as main pages:
+   - Header / Footer Bar: var(--sidebar-bg) (#efede4 Warm Linen) + 1px border
+   - Dialog Body Canvas:  var(--parchment)  (#f5f4ed Warm Parchment)
+   - Inner List / Cards:  var(--ivory)      (#faf9f5 Lifted Ivory Card) + row dividers
+   - Controls inside:     var(--control-bg) (#f2f0e6 Recessed Warm Sand)
+   ========================================================================== */
+.MuiDialog-paper {
+  background-color: var(--parchment) !important;
+  background-image: none !important;
+  color: var(--near-black) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--kami-popover-shadow) !important;
+  overflow: hidden !important;
+}
+
+/* Modal Header Bar ("界面设置", "系统代理设置", "Tun 模式", etc.) */
+.MuiDialogTitle-root {
+  background-color: var(--sidebar-bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 13px 20px !important;
+  font-family: var(--serif) !important;
+  font-size: 17.5px !important;
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.2px currentColor;
+  color: var(--near-black) !important;
+}
+
+/* Modal Content Canvas (#f5f4ed Warm Parchment) */
+.MuiDialogContent-root {
+  background-color: var(--parchment) !important;
+  color: var(--near-black) !important;
+  padding: 14px 18px !important;
+  margin-top: 0 !important;
+}
+
+/* Single-Column Settings Modals ("界面设置", "系统代理", "Tun 模式", etc.):
+   Wrap the single <List> in an Elevated Ivory Paper Card (#faf9f5) */
+.MuiDialogContent-root:not(:has(> .MuiList-root + .MuiList-root)) .MuiList-root {
+  background-color: var(--ivory) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  padding: 4px 14px !important;
+}
+
+.MuiDialogContent-root:not(:has(> .MuiList-root + .MuiList-root)) .MuiList-root > .MuiListItem-root {
+  border-bottom: 1px solid var(--border-soft) !important;
+  padding: 7px 4px !important;
+  min-height: 44px !important;
+}
+
+.MuiDialogContent-root:not(:has(> .MuiList-root + .MuiList-root)) .MuiList-root > .MuiListItem-root:last-child {
+  border-bottom: none !important;
+}
+
+/* Two-Column Visual Editor Modals ("编辑节点", "编辑规则", "编辑代理组"):
+   Keep left form column and right virtual-list column properly sized inside flex cards
+   so buttons ("添加前置/后置") and virtual list items NEVER overflow the bottom border! */
+.MuiDialogContent-root:has(> .MuiList-root + .MuiList-root) {
+  gap: 12px !important;
+}
+
+.MuiDialogContent-root:has(> .MuiList-root + .MuiList-root) > .MuiList-root {
+  background-color: var(--ivory) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  padding: 10px 12px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.MuiDialogContent-root:has(> .MuiList-root + .MuiList-root) > .MuiList-root:first-of-type > .MuiBox-root {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.MuiDialogContent-root:has(> .MuiList-root + .MuiList-root) > .MuiList-root:last-of-type > div:last-child {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.MuiDialogContent-root:has(> .MuiList-root + .MuiList-root) .MuiListItem-root {
+  border-bottom: none !important;
+  min-height: unset !important;
+}
+
+/* Node / Rule / Group cards inside the right virtual list of Visual Editors */
+.MuiDialogContent-root:has(> .MuiList-root + .MuiList-root) > .MuiList-root:last-of-type .MuiListItem-root {
+  background-color: var(--control-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+}
+
+/* Clickable List Rows inside Modals (e.g., "Clash 内核" selector) */
+.MuiDialogContent-root .MuiList-root .MuiListItemButton-root {
+  border-radius: 6px !important;
+  margin: 4px 0 !important;
+  border: 1px solid transparent !important;
+}
+
+.MuiDialogContent-root .MuiList-root .MuiListItemButton-root:hover {
+  background-color: var(--inline-code-bg) !important;
+}
+
+.MuiDialogContent-root .MuiList-root .MuiListItemButton-root.Mui-selected,
+.MuiDialogContent-root .MuiList-root .MuiListItemButton-root.Mui-selected:hover {
+  background-color: var(--brand-tint) !important;
+  border: 1px solid var(--brand) !important;
+  border-left: 3.5px solid var(--brand) !important;
+  color: var(--brand) !important;
+}
+
+/* Modals without <List> or <TextField> (e.g., "热键设置", "网络接口", "Web UI", "连接详情"):
+   Style non-form direct child blocks as elevated Ivory Cards on the Parchment modal canvas.
+   CRITICAL: Exclude .MuiFormControl-root / .MuiTextField-root so form modals like "新建测试"
+   and "新建配置" never get double-boxed or displace floating InputLabels! */
+.MuiDialogContent-root:not(:has(.MuiList-root)):not(:has(.monaco-editor)) > div:not(.MuiFormControl-root):not(.MuiTextField-root) {
+  background-color: var(--ivory) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-card-shadow) !important;
+  padding: 8px 14px !important;
+  margin-bottom: 8px !important;
+  box-sizing: border-box !important;
+}
+
+.MuiDialogContent-root:not(:has(.MuiList-root)):not(:has(.monaco-editor)) > div:not(.MuiFormControl-root):not(.MuiTextField-root):last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Form Modals ("新建测试", "新建配置", "编辑配置"):
+   Keep FormControl wrapper transparent & unpadded so floating labels ("名称", "图标", "测试地址")
+   align properly, and style the OutlinedInput as an elevated Ivory field on the Parchment canvas */
+.MuiDialogContent-root > .MuiFormControl-root,
+.MuiDialogContent-root > .MuiTextField-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.MuiDialogContent-root > .MuiFormControl-root .MuiOutlinedInput-root,
+.MuiDialogContent-root > .MuiTextField-root .MuiOutlinedInput-root {
+  background: var(--ivory) !important;
+  background-color: var(--ivory) !important;
+}
+
+.MuiInputLabel-root {
+  color: var(--olive) !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: var(--brand) !important;
+}
+
+/* Website Test Tiles ("网站测试": Apple, GitHub, Google, YouTube) */
+.base-content div:has(> div[data-sortable-handle]) {
+  background-color: var(--control-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: none !important;
+  color: var(--dark-warm) !important;
+}
+
+.base-content div:has(> div[data-sortable-handle]):hover {
+  background-color: var(--warm-sand) !important;
+  border-color: var(--line) !important;
+}
+
+/* Hotkey keycap badges & Network Interface IP badges inside modals */
+.MuiDialogContent-root .item {
+  background-color: var(--control-bg) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 4px !important;
+  color: var(--near-black) !important;
+  font-family: var(--mono) !important;
+  padding: 1px 6px !important;
+}
+
+/* Keep Contained Button icons ("添加前置代理节点", "添加后置代理节点", etc.) Ivory White */
+.MuiButton-contained .MuiSvgIcon-root,
+.MuiButton-containedPrimary .MuiSvgIcon-root {
+  color: var(--ivory) !important;
+}
+
+/* Info Icon (i) inside Settings & Modals (exclude buttons & inputs) */
+.MuiDialogContent-root .MuiListItem-root > .MuiSvgIcon-root {
+  color: var(--stone) !important;
+}
+
+/* Monaco Code Editor inside Modals ("编辑节点/规则/代理组 YAML", "全局扩展覆写配置", "全局扩展脚本"):
+   Unify .margin (line numbers) and .monaco-editor-background into one framed Ivory surface
+   so line numbers 1 2 3 4 never look split or detached from the code area! */
+.MuiDialogContent-root > section:has(.monaco-editor) {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--kami-radius-md) !important;
+  overflow: hidden !important;
+  background-color: var(--ivory) !important;
+}
+
+.monaco-editor,
+.monaco-editor .margin,
+.monaco-editor-background,
+.monaco-editor .inputarea.ime-input {
+  background-color: var(--ivory) !important;
+}
+
+.monaco-editor .margin {
+  border-right: 1px solid var(--border-soft) !important;
+}
+
+/* Modal Footer Bar ("关闭", "取消", "保存") */
+.MuiDialogActions-root {
+  background-color: var(--sidebar-bg) !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 10px 20px !important;
+}
+
+/* Popover Menus, Drawers & Autocomplete Dropdowns */
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiDrawer-paper,
+.MuiAutocomplete-paper {
+  background-color: var(--ivory) !important;
+  background-image: none !important;
+  color: var(--near-black) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-popover-shadow) !important;
+}
+
+/* Tooltips ("全局扩展覆写配置", icon hints, etc.) */
+body .MuiTooltip-tooltip,
+.MuiTooltip-tooltip {
+  background-color: var(--ivory) !important;
+  color: var(--near-black) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--kami-radius-sm) !important;
+  font-family: var(--serif) !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  padding: 5px 10px !important;
+  box-shadow: var(--kami-popover-shadow) !important;
+}
+
+body .MuiTooltip-arrow,
+.MuiTooltip-arrow {
+  color: var(--ivory) !important;
+}
+
+.MuiBackdrop-root:not(.MuiBackdrop-invisible) {
+  background-color: rgba(20, 20, 19, 0.28) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+.MuiMenuItem-root {
+  font-size: 13.5px !important;
+  color: var(--dark-warm) !important;
+  border-radius: var(--kami-radius-sm) !important;
+  margin: 2px 6px !important;
+  padding: 6px 10px !important;
+}
+
+.MuiMenuItem-root:hover {
+  background-color: var(--warm-sand) !important;
+  color: var(--near-black) !important;
+}
+
+.MuiMenuItem-root.Mui-selected,
+.MuiMenuItem-root.Mui-selected:hover {
+  background-color: var(--tag-bg) !important;
+  color: var(--brand) !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   08. LEVEL 3 CONTROLS: BUTTONS, TABS & SEGMENTED CONTROLS
+   ========================================================================== */
+/* Primary Contained Button -> Kami .btn-primary (Ink Blue #1B365D) */
+.MuiButton-contained,
+.MuiButton-containedPrimary,
+.MuiFab-root {
+  background-color: var(--brand) !important;
+  color: var(--ivory) !important;
+  border: 1px solid var(--brand) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: none !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+}
+
+.MuiButton-contained:hover,
+.MuiButton-containedPrimary:hover,
+.MuiFab-root:hover {
+  background-color: var(--brand-light) !important;
+  border-color: var(--brand-light) !important;
+  box-shadow: none !important;
+}
+
+/* Secondary / Outlined / Text Button -> Kami .btn-secondary (Recessed Control Tone) */
+.MuiButton-outlined,
+.MuiButton-text {
+  background-color: var(--control-bg) !important;
+  color: var(--dark-warm) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: none !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+}
+
+.MuiButton-outlined:hover,
+.MuiButton-text:hover {
+  background-color: var(--warm-sand) !important;
+  border-color: var(--stone) !important;
+  color: var(--near-black) !important;
+}
+
+/* ButtonGroup (e.g., Rule / Global / Direct & Light / Dark / System mode switchers) */
+.MuiButtonGroup-root:not(:has(.MuiIconButton-root)) {
+  background-color: var(--control-bg) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--kami-radius-md) !important;
+  padding: 2px !important;
+  box-shadow: none !important;
+}
+
+.MuiButtonGroup-root:not(:has(.MuiIconButton-root)) .MuiButton-root {
+  border: none !important;
+  border-radius: 6px !important;
+  margin: 0 !important;
+  padding: 4px 12px !important;
+}
+
+.MuiButtonGroup-root:not(:has(.MuiIconButton-root)) .MuiButton-outlined {
+  background-color: transparent !important;
+  color: var(--olive) !important;
+}
+
+.MuiButtonGroup-root:not(:has(.MuiIconButton-root)) .MuiButton-outlined:hover {
+  background-color: var(--warm-sand) !important;
+  color: var(--near-black) !important;
+}
+
+.MuiButtonGroup-root:not(:has(.MuiIconButton-root)) .MuiButton-contained {
+  background-color: var(--brand) !important;
+  color: var(--ivory) !important;
+}
+
+/* Icon-only ButtonGroup in Page Header (e.g. ? / Telegram / GitHub in Settings header) */
+.MuiButtonGroup-root:has(.MuiIconButton-root) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  gap: 4px !important;
+}
+
+/* Icon Buttons */
+.MuiIconButton-root {
+  color: var(--olive) !important;
+  border-radius: var(--kami-radius-md) !important;
+  transition: background-color 120ms ease, color 120ms ease !important;
+}
+
+.MuiIconButton-root:hover {
+  background-color: var(--warm-sand) !important;
+  color: var(--near-black) !important;
+}
+
+/* Tabs */
+.MuiTabs-root {
+  min-height: 38px !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.MuiTab-root {
+  text-transform: none !important;
+  font-family: var(--serif) !important;
+  font-weight: 500 !important;
+  color: var(--olive) !important;
+  min-height: 38px !important;
+}
+
+.MuiTab-root.Mui-selected {
+  color: var(--brand) !important;
+  font-weight: 600 !important;
+}
+
+.MuiTabs-indicator {
+  background-color: var(--brand) !important;
+  height: 2px !important;
+}
+
+/* ==========================================================================
+   09. TAGS, CHIPS & BADGES (Solid Hex Only)
+   ========================================================================== */
+.MuiChip-root {
+  background-color: var(--tag-bg) !important;
+  color: var(--brand) !important;
+  border: none !important;
+  border-radius: var(--kami-radius-sm) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2px !important;
+  height: 22px !important;
+}
+
+.MuiChip-outlined {
+  background-color: var(--control-bg) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--dark-warm) !important;
+}
+
+.MuiChip-colorSuccess {
+  background-color: var(--ok-bg) !important;
+  color: var(--ok-fg) !important;
+}
+
+.MuiChip-colorWarning,
+.MuiChip-colorError {
+  background-color: var(--breaking-bg) !important;
+  color: var(--breaking-fg) !important;
+}
+
+/* ==========================================================================
+   10. INPUTS, SELECTS, SWITCHES & DIVIDERS
+   (Fixes "启动脚本" ghost box bug & "简体..." Select truncation)
+   ========================================================================== */
+/* Outlined & Filled Inputs / Selects ONLY — recessed warm tone inside ivory cards */
+.MuiOutlinedInput-root,
+.MuiFilledInput-root {
+  background: var(--control-bg) !important;
+  background-color: var(--control-bg) !important;
+  color: var(--near-black) !important;
+  border-radius: var(--kami-radius-md) !important;
+  transition: background-color 120ms ease, border-color 120ms ease !important;
+}
+
+.MuiOutlinedInput-root:hover,
+.MuiFilledInput-root:hover {
+  background: var(--warm-sand) !important;
+  background-color: var(--warm-sand) !important;
+}
+
+/* Inner Select label: keep transparent so it doesn't clip border or truncate "简体中文" */
+.MuiSelect-select {
+  background: transparent !important;
+  background-color: transparent !important;
+  font-size: 13.5px !important;
+  letter-spacing: 0 !important;
+  padding-left: 12px !important;
+}
+
+/* Ensure Language Select in Settings has enough room to show "简体中文" without "..." */
+.MuiListItem-root .MuiOutlinedInput-root:has(.MuiSelect-select) {
+  min-width: 122px !important;
+}
+
+/* Borderless <Input disableUnderline> (used by "启动脚本" Startup Script row):
+   MUST remain completely transparent so no empty 230px box appears next to "浏览"! */
+.MuiInput-root,
+.MuiInput-root.Mui-disabled {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.MuiInput-root .MuiInputBase-input {
+  background: transparent !important;
+  color: var(--olive) !important;
+  font-family: var(--mono) !important;
+  font-size: 12.5px !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: var(--line) !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--stone) !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--brand) !important;
+  border-width: 1px !important;
+}
+
+/* Switches */
+.MuiSwitch-root .MuiSwitch-track {
+  background-color: var(--line) !important;
+  opacity: 1 !important;
+}
+
+.MuiSwitch-root .MuiSwitch-switchBase.Mui-checked {
+  color: var(--ivory) !important;
+}
+
+.MuiSwitch-root .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: var(--brand) !important;
+  opacity: 1 !important;
+}
+
+.MuiSwitch-root .MuiSwitch-thumb {
+  background-color: var(--ivory) !important;
+  box-shadow: 0 1px 2px rgba(20, 20, 19, 0.18) !important;
+}
+
+/* Dividers */
+hr,
+.MuiDivider-root {
+  border-color: var(--border) !important;
+}
+
+/* Alerts & Notices */
+.MuiAlert-root,
+.MuiSnackbarContent-root {
+  background-color: var(--ivory) !important;
+  color: var(--near-black) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--kami-radius-md) !important;
+  box-shadow: var(--kami-popover-shadow) !important;
+}
+
+/* ==========================================================================
+   11. SCROLLBARS & MOTION RESTRAINT
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--stone);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
